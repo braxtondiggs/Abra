@@ -1,16 +1,113 @@
+@font-face {
+    font-family: 'helvetica_neue_lt_pro45_light';
+    src: url('../fonts/helveticaneueltpro-lt-webfont.eot');
+    src: url('../fonts/helveticaneueltpro-lt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneueltpro-lt-webfont.woff') format('woff'),
+         url('../fonts/helveticaneueltpro-lt-webfont.ttf') format('truetype'),
+         url('../fonts/helveticaneueltpro-lt-webfont.svg#helvetica_neue_lt_pro45_light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helvetica_neue_lt_pro47LtCn';
+    src: url('../fonts/helveticaneueltpro-ltcn-webfont.eot');
+    src: url('../fonts/helveticaneueltpro-ltcn-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneueltpro-ltcn-webfont.woff') format('woff'),
+         url('../fonts/helveticaneueltpro-ltcn-webfont.ttf') format('truetype'),
+         url('../fonts/helveticaneueltpro-ltcn-webfont.svg#helvetica_neue_lt_pro47LtCn') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helvetica_neue_lt_27ultraLtCn';
+    src: url('../fonts/helveticaneueltpro-ultltcn-webfont.eot');
+    src: url('../fonts/helveticaneueltpro-ultltcn-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneueltpro-ultltcn-webfont.woff') format('woff'),
+         url('../fonts/helveticaneueltpro-ultltcn-webfont.ttf') format('truetype'),
+         url('../fonts/helveticaneueltpro-ultltcn-webfont.svg#helvetica_neue_lt_27ultraLtCn') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@import 'intro';
+$highlight1: #B83B5E;
+$header: #222831;
+$text: #CCC;
+body, h1, h2, p {
+    font-family: 'helvetica_neue_lt_pro47LtCn';
+    color: #EEEEEE;
+}
+.bar.bar-stable {
+    background-color: $header;
+    border-color: #222;
+    .title {
+        color: $text;
+        font-size: 20px;
+    }
+}
+ion-view.pane {
+    background-color: #393E46;
+    ion-content{
+        padding-top: 20px;
+    }
+}
+.header {
+    color: $highlight1;
+    font-family: 'helvetica_neue_lt_27ultraLtCn';
+    font-size: 38px;
+    margin-bottom: 25px;
+
+}
+.header-image {
+    margin:15px auto;
+    img.image {
+        z-index:1;
+        -webkit-filter: blur(22px) brightness(0);
+    }
+}
+.play-me {
+    margin-bottom: 20px;
+    color: $text;
+    font-size:18px;
+    margin-top:10px;
+    margin-bottom: 40px;
+    i {
+        border: 2px solid $highlight1;
+        color: $text;
+        padding: 10px 16px;
+    }
+}
+.row .rapper {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 .row:nth-child(even) {
+    padding: 0 10px;
     .col-50:nth-child(odd) {
-        border-right: 1px solid gray;
-        border-bottom: 1px solid gray;
+        border-right: .5px solid $highlight1;
+        border-top: .5px solid $highlight1;
     }
     .col-50:nth-child(even) {
-        border-bottom: 1px solid gray;
+        border-top: .5px solid $highlight1;
+        border-left: .5px solid $highlight1;
+        padding-left:10px;
     }
 }
 
 .row:nth-child(odd) {
+    padding-right:  10px;
+    padding-left:  10px;
     .col-50:nth-child(odd) {
-        border-right: 1px solid gray;
+        border-right: .5px solid $highlight1;
+        border-bottom: .5px solid $highlight1;
+        padding-top:10px;
+    }
+    .col-50:nth-child(even) {
+        border-bottom: .5px solid $highlight1;
+        border-left: .5px solid $highlight1;
+        padding-top:10px;
     }
 }
 
@@ -27,24 +124,14 @@
     span {
         line-height: 62px;
         margin-left: 5px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
 }
-
 .center {
     text-align: center;
 }
-
-.play-me {
-    margin-bottom: 20px;
-    i {
-        border: 2px solid black;
-        padding: 10px 14px;
-    }
+.correct {
+    border: 2px solid #2ecc71!important;
 }
-.header-image {
-	margin:15px auto;
-	display:block;
-	-webkit-filter: brightness(0%);
+.wrong {
+    border: 2px solid #e74c3c!important;
 }

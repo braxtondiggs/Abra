@@ -1,0 +1,24 @@
+<ion-view view-title="Rapper Ad-libs">
+    <ion-content>
+        <h2 class="center header">{{rapperCount}}. What rapper is this?</h2>
+        <div class="center header-image">
+            <div class="header-wrapper">
+                <img class="image" ng-src="{{rappers.get('rapper').get('image')._url}}"/>
+            </div>
+        </div>
+        <div class="play-me center" ng-click="playAudio(rapperCount)">
+            <i class="icons ion-play"></i>&nbsp;&nbsp;Play Again!
+        </div>
+        <div class="play-me center" ng-click="next(rapperCount)" style="display:none">
+            <i class="icons ion-arrow-right-c"></i>&nbsp;&nbsp;Next!
+        </div>
+        <div class="row">
+            <div class="col col-50 rapper" ng-click="answer(1, rapperCount)"><img ng-src="{{rappers.rappers[0].get('image')._url}}" /><span>{{rappers.rappers[0].get('name')}}</span></div>
+            <div class="col col-50 rapper" ng-click="answer(2, rapperCount)"><img ng-src="{{rappers.rappers[1].get('image')._url}}" /><span>{{rappers.rappers[1].get('name')}}</span></div>
+        </div>
+        <div class="row">
+            <div class="col col-50 rapper" ng-click="answer(3, rapperCount)"><img ng-src="{{rappers.rappers[2].get('image')._url}}" /><span>{{rappers.rappers[2].get('name')}}</span></div>
+            <div class="col col-50 rapper" ng-click="answer(4, rapperCount)"><img ng-src="{{rappers.rappers[3].get('image')._url}}" /><span>{{rappers.rappers[3].get('name')}}</span></div>
+        </div>
+    </ion-content>
+</ion-view>
