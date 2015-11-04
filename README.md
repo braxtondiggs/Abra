@@ -1,0 +1,1 @@
+# Abra ![Abra](http://sprites.pokecheck.org/i/063.gif)

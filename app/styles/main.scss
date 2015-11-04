@@ -1,10 +1,7 @@
 @font-face {
     font-family: 'helvetica_neue_lt_pro45_light';
     src: url('../fonts/helveticaneueltpro-lt-webfont.eot');
-    src: url('../fonts/helveticaneueltpro-lt-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/helveticaneueltpro-lt-webfont.woff') format('woff'),
-         url('../fonts/helveticaneueltpro-lt-webfont.ttf') format('truetype'),
-         url('../fonts/helveticaneueltpro-lt-webfont.svg#helvetica_neue_lt_pro45_light') format('svg');
+    src: url('../fonts/helveticaneueltpro-lt-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneueltpro-lt-webfont.woff') format('woff'), url('../fonts/helveticaneueltpro-lt-webfont.ttf') format('truetype'), url('../fonts/helveticaneueltpro-lt-webfont.svg#helvetica_neue_lt_pro45_light') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -12,10 +9,7 @@
 @font-face {
     font-family: 'helvetica_neue_lt_pro47LtCn';
     src: url('../fonts/helveticaneueltpro-ltcn-webfont.eot');
-    src: url('../fonts/helveticaneueltpro-ltcn-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/helveticaneueltpro-ltcn-webfont.woff') format('woff'),
-         url('../fonts/helveticaneueltpro-ltcn-webfont.ttf') format('truetype'),
-         url('../fonts/helveticaneueltpro-ltcn-webfont.svg#helvetica_neue_lt_pro47LtCn') format('svg');
+    src: url('../fonts/helveticaneueltpro-ltcn-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneueltpro-ltcn-webfont.woff') format('woff'), url('../fonts/helveticaneueltpro-ltcn-webfont.ttf') format('truetype'), url('../fonts/helveticaneueltpro-ltcn-webfont.svg#helvetica_neue_lt_pro47LtCn') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,54 +17,95 @@
 @font-face {
     font-family: 'helvetica_neue_lt_27ultraLtCn';
     src: url('../fonts/helveticaneueltpro-ultltcn-webfont.eot');
-    src: url('../fonts/helveticaneueltpro-ultltcn-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/helveticaneueltpro-ultltcn-webfont.woff') format('woff'),
-         url('../fonts/helveticaneueltpro-ultltcn-webfont.ttf') format('truetype'),
-         url('../fonts/helveticaneueltpro-ultltcn-webfont.svg#helvetica_neue_lt_27ultraLtCn') format('svg');
+    src: url('../fonts/helveticaneueltpro-ultltcn-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneueltpro-ultltcn-webfont.woff') format('woff'), url('../fonts/helveticaneueltpro-ultltcn-webfont.ttf') format('truetype'), url('../fonts/helveticaneueltpro-ultltcn-webfont.svg#helvetica_neue_lt_27ultraLtCn') format('svg');
     font-weight: normal;
     font-style: normal;
 }
+
 @import 'intro';
+@import 'finished';
 $highlight1: #B83B5E;
 $header: #222831;
 $text: #CCC;
-body, h1, h2, p {
+body,
+h1,
+h2,
+h3,
+p {
     font-family: 'helvetica_neue_lt_pro47LtCn';
     color: #EEEEEE;
 }
+
 .bar.bar-stable {
     background-color: $header;
     border-color: #222;
+    background-image: none;
     .title {
         color: $text;
         font-size: 20px;
     }
 }
+
 ion-view.pane {
     background-color: #393E46;
-    ion-content{
+    ion-content {
         padding-top: 20px;
     }
 }
+
 .header {
     color: $highlight1;
     font-family: 'helvetica_neue_lt_27ultraLtCn';
     font-size: 38px;
     margin-bottom: 25px;
-
 }
+
 .header-image {
-    margin:15px auto;
+    margin: 15px auto;
+    position: relative;
     img.image {
-        z-index:1;
+        z-index: 1;
         -webkit-filter: blur(22px) brightness(0);
+        &.show-image {
+            -webkit-filter: blur(0) brightness(1);
+            -webkit-transition: -webkit-filter 500ms linear;
+        }
+    }
+    &:after {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        font-size: 38px;
+        display: block;
+        width: 100%;
+        text-shadow: #333 1px 1px;
+        transform: translate(-50%, 0);
+        -webkit-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: bounce;
+        animation-name: bounce;
+        -webkit-transform-origin: center bottom;
+        transform-origin: center bottom;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+    }
+    &.correct:after {
+        content: 'Correct';
+        color: #2ecc71;
+    }
+    &.wrong:after {
+        content: 'Incorrect';
+        color: #e74c3c;
     }
 }
+
 .play-me {
     margin-bottom: 20px;
     color: $text;
-    font-size:18px;
-    margin-top:10px;
+    font-size: 18px;
+    margin-top: 10px;
     margin-bottom: 40px;
     i {
         border: 2px solid $highlight1;
@@ -78,36 +113,44 @@ ion-view.pane {
         padding: 10px 16px;
     }
 }
+
 .row .rapper {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-}
-.row:nth-child(even) {
-    padding: 0 10px;
-    .col-50:nth-child(odd) {
-        border-right: .5px solid $highlight1;
-        border-top: .5px solid $highlight1;
+    &.correct {
+        border: 2px solid #2ecc71!important;
     }
-    .col-50:nth-child(even) {
-        border-top: .5px solid $highlight1;
-        border-left: .5px solid $highlight1;
-        padding-left:10px;
+    &.wrong {
+        border: 2px solid #e74c3c!important;
     }
 }
 
-.row:nth-child(odd) {
-    padding-right:  10px;
-    padding-left:  10px;
+.row.options:nth-child(even) {
+    padding: 0 10px;
     .col-50:nth-child(odd) {
-        border-right: .5px solid $highlight1;
-        border-bottom: .5px solid $highlight1;
-        padding-top:10px;
+        border-right: 1px solid $highlight1;
+        border-top: 1px solid $highlight1;
     }
     .col-50:nth-child(even) {
-        border-bottom: .5px solid $highlight1;
-        border-left: .5px solid $highlight1;
-        padding-top:10px;
+        border-top: 1px solid $highlight1;
+        border-left: 1px solid $highlight1;
+        padding-left: 10px;
+    }
+}
+
+.row.options:nth-child(odd) {
+    padding-right: 10px;
+    padding-left: 10px;
+    .col-50:nth-child(odd) {
+        border-right: 1px solid $highlight1;
+        border-bottom: 1px solid $highlight1;
+        padding-top: 10px;
+    }
+    .col-50:nth-child(even) {
+        border-bottom: 1px solid $highlight1;
+        border-left: 1px solid $highlight1;
+        padding-top: 10px;
     }
 }
 
@@ -126,12 +169,7 @@ ion-view.pane {
         margin-left: 5px;
     }
 }
+
 .center {
     text-align: center;
-}
-.correct {
-    border: 2px solid #2ecc71!important;
-}
-.wrong {
-    border: 2px solid #e74c3c!important;
 }

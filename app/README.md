@@ -1,5 +1,3 @@
-# Abra ![Abra](http://sprites.pokecheck.org/i/063.gif)
-
 This is an addon starter template for the [Ionic Framework](http://ionicframework.com/).
 
 ## How to use this template

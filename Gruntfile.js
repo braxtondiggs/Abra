@@ -257,13 +257,14 @@ module.exports = function (grunt) {
             '<%= yeoman.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
             '*.html',
             'templates/**/*.html',
-            'fonts/*'
+            'fonts/*',
+            '!<%= yeoman.images %>/rappers/*'
           ]
         }, {
           expand: true,
           cwd: '.temp/<%= yeoman.images %>',
           dest: '<%= yeoman.dist %>/<%= yeoman.images %>',
-          src: ['generated/*']
+          src: ['generated/*', '!<%= yeoman.images %>/rappers']
         }]
       },
       styles: {
@@ -291,6 +292,9 @@ module.exports = function (grunt) {
         src: [
           '**/*',
           '!**/*.(scss,sass,css)',
+          '!<%= yeoman.images %>/rappers/',
+          '!**/mp3/',
+          '!mp3/'
         ]
       },
       tmp: {
@@ -516,10 +520,10 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('run', function() {
     grunt.config('concurrent.ionic.tasks', ['ionic:run:' + this.args.join(), 'watch']);
-    return grunt.task.run(['init', 'concurrent:ionic']);
+    return grunt.task.run(['compress', 'concurrent:ionic']);
   });
   grunt.registerTask('build', function() {
-    return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
+    return grunt.task.run(['compress', 'ionic:build:' + this.args.join()]);
   });
 
   grunt.registerTask('init', [

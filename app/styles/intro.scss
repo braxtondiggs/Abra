@@ -1,0 +1,36 @@
+$highlight1: #B83B5E;
+.intro {
+
+	.intro-image {
+		margin: auto;
+		display:block;
+		margin-top: 30px;
+		height: 150px;
+	}
+	.button {
+		margin: auto;
+		display:block;
+		border-color: $highlight1!important;
+		color: $highlight1!important;
+		position: absolute;
+		bottom: 100px;
+		left: 50%;
+    	transform: translate(-50%, 0);
+		width: 60%;
+		&.activated {
+			background-color: rgba($highlight1, 0.8)!important;
+		}
+	}
+	.scroll {
+		height: 100%;
+	}
+	.header {
+		font-size: 38px;
+	}
+	.description {
+		width: 80%;
+		margin: auto;
+		display:block;
+		color: #CCC;
+	}
+}

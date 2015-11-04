@@ -33,7 +33,8 @@ angular.module('abra', ['ionic', 'abra.controllers', 'ngCordova'])
 			url: '/intro',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/intro.html'
+					templateUrl: 'templates/intro.html',
+					controller: 'IntroCtrl'
 				}
 			}
 		})
@@ -45,7 +46,16 @@ angular.module('abra', ['ionic', 'abra.controllers', 'ngCordova'])
 					controller: 'MainCtrl'
 				}
 			}
+		})
+		.state('app.finished', {
+			url: '/finished/:score/:total',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/finished.html',
+					controller: 'FinishedCtrl'
+				}
+			}
 		});
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/app/main');
+	$urlRouterProvider.otherwise('/app/intro');
 });

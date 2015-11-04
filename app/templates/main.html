@@ -1,24 +1,36 @@
-<ion-view view-title="Rapper Ad-libs">
-    <ion-content>
-        <h2 class="center header">{{rapperCount}}. What rapper is this?</h2>
-        <div class="center header-image">
+<ion-view view-title="Rapper Ad-libs" hide-back-button="true">
+    <ion-content ng-show="rappers != null && imgLoad == true" ng-class="{'animated fadeInUp': rappers != null && imgLoad == true}">
+        <h2 class="center header">{{rapperCount+1}}. What rapper is this?</h2>
+        <div class="center header-image {{rappers[rapperCount].answer.status}}">
             <div class="header-wrapper">
-                <img class="image" ng-src="{{rappers.get('rapper').get('image')._url}}"/>
+                <img class="image animated" imageonload="loaded()" ng-class="{'show-image tada': rappers[rapperCount].answer !==  null}" ng-src="{{rappers[rapperCount].get('rapper').get('image')._url}}"/>
             </div>
         </div>
-        <div class="play-me center" ng-click="playAudio(rapperCount)">
+        <div class="play-me center" ng-click="playAudio()" ng-show="rappers[rapperCount].answer ===  null">
             <i class="icons ion-play"></i>&nbsp;&nbsp;Play Again!
         </div>
-        <div class="play-me center" ng-click="next(rapperCount)" style="display:none">
-            <i class="icons ion-arrow-right-c"></i>&nbsp;&nbsp;Next!
+        <div class="play-me center" ng-click="next()" ng-show="rappers[rapperCount].answer !==  null">
+            <i class="icons ion-arrow-right-c tada animated infinite" style="animation-duration: 2s;"></i>&nbsp;&nbsp;Next!
         </div>
-        <div class="row">
-            <div class="col col-50 rapper" ng-click="answer(1, rapperCount)"><img ng-src="{{rappers.rappers[0].get('image')._url}}" /><span>{{rappers.rappers[0].get('name')}}</span></div>
-            <div class="col col-50 rapper" ng-click="answer(2, rapperCount)"><img ng-src="{{rappers.rappers[1].get('image')._url}}" /><span>{{rappers.rappers[1].get('name')}}</span></div>
+        <div class="row options">
+            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[0] === 1, 'wrong': rappers[rapperCount].answer.options[0] === 2}" ng-click="answer(0)">
+                <img ng-src="{{rappers[rapperCount].rappers[0].get('image')._url}}" />
+                <span>{{rappers[rapperCount].rappers[0].get('name')}}</span>
+            </div>
+            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[1] === 1, 'wrong': rappers[rapperCount].answer.options[1] === 2}" ng-click="answer(1)">
+                <img ng-src="{{rappers[rapperCount].rappers[1].get('image')._url}}" />
+                <span>{{rappers[rapperCount].rappers[1].get('name')}}</span>
+            </div>
         </div>
-        <div class="row">
-            <div class="col col-50 rapper" ng-click="answer(3, rapperCount)"><img ng-src="{{rappers.rappers[2].get('image')._url}}" /><span>{{rappers.rappers[2].get('name')}}</span></div>
-            <div class="col col-50 rapper" ng-click="answer(4, rapperCount)"><img ng-src="{{rappers.rappers[3].get('image')._url}}" /><span>{{rappers.rappers[3].get('name')}}</span></div>
+        <div class="row options">
+            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[2] === 1, 'wrong': rappers[rapperCount].answer.options[2] === 2}" ng-click="answer(2)">
+                <img ng-src="{{rappers[rapperCount].rappers[2].get('image')._url}}" />
+                <span>{{rappers[rapperCount].rappers[2].get('name')}}</span>
+            </div>
+            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[3] === 1, 'wrong': rappers[rapperCount].answer.options[3] === 2}" ng-click="answer(3)">
+                <img ng-src="{{rappers[rapperCount].rappers[3].get('image')._url}}" />
+                <span>{{rappers[rapperCount].rappers[3].get('name')}}</span>
+            </div>
         </div>
     </ion-content>
 </ion-view>

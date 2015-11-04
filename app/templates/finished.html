@@ -1,0 +1,20 @@
+<ion-view view-title="Rapper Ad-libs">
+    <ion-content class="padding">
+        <h2 class="center header">Complete!</h2>
+        <hr />
+        <h3 class="center">You score <strong>{{score}}</strong> out of {{total}}!</h3>
+        <p class="center">The average score was 9.</p>
+        <div class="social_container row">
+            <div class="facebook col col-25 animated bounceInRight delay-3" ng-click="shareFacebook()">
+                <img ng-src="images/social/facebook.png" />
+            </div>
+            <div class="twitter col col-25 animated bounceInRight delay-4" ng-click="shareTwitter()">
+                <img ng-src="images/social/twitter.png" />
+            </div>
+            <div class="share col col-25 animated bounceInRight delay-5" ng-click="share()">
+                <img ng-src="images/social/share.png" />
+            </div>
+        </div>
+        <hr />
+    </ion-content>
+</ion-view>
