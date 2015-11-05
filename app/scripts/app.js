@@ -1,7 +1,7 @@
 'use strict';
 angular.module('abra', ['ionic', 'abra.controllers', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaStatusbar, $cordovaGoogleAnalytics) {
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
@@ -13,7 +13,12 @@ angular.module('abra', ['ionic', 'abra.controllers', 'ngCordova'])
 		if (window.StatusBar) {
 			// org.apache.cordova.statusbar required
 			StatusBar.styleDefault();
+			$cordovaStatusbar.styleHex('#222831');
 		}
+
+		if(window.cordova){
+            $cordovaGoogleAnalytics.startTrackerWithId((/(android)/i.test(navigator.userAgent)) ?'UA-55153042-4':'UA-55153042-5');
+        }
 	});
 	/*global Parse*/
 	Parse.initialize('uyuHSPMhDSh2GCrPSJSBLxgCS2ZDzHVlcBxBBpcz', 'TxbgkWbowXnAUI9CMdzqPhNvF0u7QcwGhkGennJn');

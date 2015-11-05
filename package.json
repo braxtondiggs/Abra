@@ -52,15 +52,14 @@
   },
   "cordovaPlugins": [
     "com.ionic.keyboard",
-    {
-      "locator": "https://github.com/SidneyS/cordova-plugin-nativeaudio.git",
-      "id": "de.neofonie.cordova.plugin.nativeaudio"
-    },
-    "com.ionic.keyboard",
+    "cordova-plugin-appavailability",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
     "cordova-plugin-whitelist@1.0.0",
-    "cordova-plugin-whitelist@1.0.0",
-    "com.ionic.keyboard",
-    "com.ionic.keyboard"
-  ],
-  "cordovaPlatforms": []
+    "cordova-plugin-google-analytics",
+    "cordova-plugin-x-socialsharing",
+    "org.pushandplay.cordova.apprate",
+    "org.apache.cordova.statusbar",
+    "cordova-plugin-admobpro"
+  ]
 }

@@ -1,14 +1,14 @@
 'use strict';
-/*global Parse*/
+/*global Parse, ionic, AdMob*/
 angular.module('abra.controllers')
-	.controller('MainCtrl', ['$scope', '$window', '$timeout', '$ionicLoading', function($scope, $window, $timeout, $ionicLoading) {
+	.controller('MainCtrl', ['$scope', '$window', '$timeout', '$ionicLoading', '$cordovaGoogleAnalytics', function($scope, $window, $timeout, $ionicLoading, $cordovaGoogleAnalytics) {
 		$ionicLoading.show();
 		$scope.rappers = null;
 		$scope.imgLoad = false;
 		$scope.rapperCount = 0;
 		$scope.correct = 0;
 		$scope.wrong = 0;
-		$scope.request = 2;
+		$scope.request = 20;
 		var audioPlayer = null;
 		var audioPlayerEnded = true;
 		var rappers = [];
@@ -35,45 +35,42 @@ angular.module('abra.controllers')
 				}
 				return array;
 			}
-			var query1, query2, randomQuery, queries = [];
 			var AdLibs = Parse.Object.extend('Adlibs');
 			var query = new Parse.Query(AdLibs);
 			query.count({
 				success: function(count) {
-					for (var i = 0; i < $scope.request; i++) {
-						query1 = new Parse.Query(AdLibs);
-						query2 = new Parse.Query(AdLibs);
-
-						query1.skip(Math.floor(Math.random() * count));
-						query1.limit(1);
-						query2.matchesKeyInQuery('objectId', 'objectId', query1);
-						queries.push(query2);
+					var arr = [];
+					while (arr.length < $scope.request) {
+						arr.push(Math.ceil(Math.random() * count));
 					}
-					randomQuery = Parse.Query.or.apply(this, queries);
-					randomQuery.include('rapper');
-					randomQuery.find().then(function(result) {
-						for (var i = 0; i < result.length; i++) {
-							result[i].rappers = [result[i].get('rapper')];
-							var arr = [result[i].get('rapper').get('name')];
-							while (arr.length < 4) {
-								var rand = rappers[Math.floor(Math.random() * rappers.length)];
-								if (!isInArray(rand.get('name'), arr)) {
-									result[i].rappers.push(rand);
-									arr.push(rand.get('name'));
+					query = new Parse.Query(AdLibs);
+					query.containedIn('index', arr);
+					query.include('rapper');
+					query.find({
+						success: function(results) {
+							for (var i = 0; i < results.length; i++) {
+								results[i].rappers = [results[i].get('rapper')];
+								var arr = [results[i].get('rapper').get('name')];
+								while (arr.length < 4) {
+									var rand = rappers[Math.floor(Math.random() * rappers.length)];
+									if (!isInArray(rand.get('name'), arr)) {
+										results[i].rappers.push(rand);
+										arr.push(rand.get('name'));
+									}
 								}
+								results[i].rappers = shuffleArray(results[i].rappers);
+								results[i].answer = null;
 							}
-							result[i].rappers = shuffleArray(result[i].rappers);
-							result[i].answer = null;
+							$timeout(function() {
+								$scope.rappers = results;
+								audioPlayer = new Audio($scope.rappers[$scope.rapperCount].get('adlib')._url);
+								audioPlayer.onended = function() {
+									audioPlayerEnded = true;
+								};
+								$scope.playAudio($scope.rapperCount);
+								$scope.$apply();
+							}, 500);
 						}
-						$timeout(function() {
-							$scope.rappers = result;
-							audioPlayer = new Audio($scope.rappers[$scope.rapperCount].get('adlib')._url);
-							audioPlayer.onended = function() {
-								audioPlayerEnded = true;
-							};
-							$scope.playAudio($scope.rapperCount);
-							$scope.$apply();
-						}, 500);
 					});
 				}
 			});
@@ -110,11 +107,14 @@ angular.module('abra.controllers')
 					$scope.wrong++;
 					$scope.rappers[$scope.rapperCount].answer.options[$scope.rappers[$scope.rapperCount].answer.chosen] = 2;
 				}
+				if (window.cordova) {
+					$cordovaGoogleAnalytics.trackEvent('Quiz', $scope.rappers[$scope.rapperCount].get('rapper').get('name'), $scope.rappers[$scope.rapperCount].answer.status, $scope.rappers[$scope.rapperCount].rappers[option].get('name'));
+				}
 			}
 		};
 		$scope.next = function() {
-			$scope.rapperCount++;
-			if (typeof $scope.rappers[$scope.rapperCount] !== 'undefined') {
+			if (typeof $scope.rappers[$scope.rapperCount + 1] !== 'undefined') {
+				$scope.rapperCount++;
 				audioPlayer = new Audio($scope.rappers[$scope.rapperCount].get('adlib')._url);
 				audioPlayerEnded = true;
 				audioPlayer.onended = function() {
@@ -134,6 +134,29 @@ angular.module('abra.controllers')
 			$ionicLoading.hide();
 			$scope.imgLoad = true;
 		};
+
+		var adPublisherIds = {
+			ios: {
+				banner: 'ca-app-pub-1710263662438559/9009941781',
+				interstitial: 'ca-app-pub-1710263662438559/1486674986'
+			},
+			android: {
+				banner: 'ca-app-pub-1710263662438559/2184678988',
+				interstitial: 'ca-app-pub-1710263662438559/3661412189'
+			}
+		};
+		var admobid = (/(android)/i.test(navigator.userAgent)) ? adPublisherIds.android : adPublisherIds.ios;
+		ionic.Platform.ready(function() {
+			if (typeof AdMob !== 'undefined') {
+				AdMob.prepareInterstitial({
+					adId: admobid.interstitial,
+					autoShow: false
+				});
+			}
+			if (window.cordova) {
+				$cordovaGoogleAnalytics.trackView('Quiz Screen');
+			}
+		});
 	}]).directive('imageonload', function() {
 		return {
 			restrict: 'A',

@@ -309,7 +309,7 @@ module.exports = function (grunt) {
       ionic: {
         tasks: [],
         options: {
-          logConcurrentOutput: false
+          logConcurrentOutput: true
         }
       },
       server: [

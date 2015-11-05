@@ -3,8 +3,11 @@
         <h2 class="center header">Complete!</h2>
         <hr />
         <h3 class="center">You score <strong>{{score}}</strong> out of {{total}}!</h3>
-        <p class="center">The average score was 9.</p>
+        <p class="center" ng-if="average !== null">The average score was {{average}}.</p>
         <div class="social_container row">
+            <div class="blank col col-25 animated bounceInRight delay-2" ng-click="startOver()">
+                <img ng-src="images/social/blank.png" />
+            </div>
             <div class="facebook col col-25 animated bounceInRight delay-3" ng-click="shareFacebook()">
                 <img ng-src="images/social/facebook.png" />
             </div>

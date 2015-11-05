@@ -1,7 +1,7 @@
 'use strict';
-/*global Parse*/
+/*global Parse, ionic, AdMob*/
 angular.module('abra.controllers')
-	.controller('IntroCtrl', ['$scope', '$window', '$interval', '$timeout', function($scope, $window, $interval , $timeout) {
+	.controller('IntroCtrl', ['$scope', '$window', '$interval', '$timeout', '$cordovaGoogleAnalytics', function($scope, $window, $interval , $timeout, $cordovaGoogleAnalytics) {
 		$scope.count = null;
 		$scope.isChanged = false;
 		var Rappers = Parse.Object.extend('Rappers');
@@ -38,4 +38,32 @@ angular.module('abra.controllers')
 			}
 			$window.location = '#/app/main';
 		};
+
+		var adPublisherIds = {
+			ios : {
+				banner: 'ca-app-pub-1710263662438559/9009941781',
+				interstitial: 'ca-app-pub-1710263662438559/1486674986'
+			},
+			android: {
+				banner: 'ca-app-pub-1710263662438559/2184678988',
+				interstitial: 'ca-app-pub-1710263662438559/3661412189'
+			}
+		};
+		var admobid = (/(android)/i.test(navigator.userAgent)) ? adPublisherIds.android : adPublisherIds.ios;
+		ionic.Platform.ready(function() {
+			if (typeof AdMob !== 'undefined' && AdMob) {
+				AdMob.createBanner({
+					adId: admobid.banner,
+					overlap: false, 
+					offsetTopBar: false, 
+					bannerAtTop: false,
+					autoShow:true,
+					isTesting: false,
+					bgColor: '#393E46'
+				});
+			}
+			if (window.cordova) {
+				$cordovaGoogleAnalytics.trackView('Introduction Screen');
+			}
+		});
 	}]);
