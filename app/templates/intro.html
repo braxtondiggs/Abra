@@ -1,7 +1,7 @@
-<ion-view hide-back-button="true" scroll="false">
+<ion-view hide-back-button="true" scroll="false" cache-view="false">
     <ion-content class="intro padding">
         <h2 class="header center">Rapper Ad-lib Quiz</h2>
-        <img ng-src="{{introImg}}" class="intro-image center" />
+        <img ng-src="{{introImg}}" class="intro-image center animated" ng-class="{'bounceInLeft': isChanged === true, 'bounceOutRight': isChanged === false}"/>
         <p class="description">
         	<strong>Ad-lib</strong><br />
         	1.Short for ad libitum. Means spontaneously, without prior practice or just unrestrained. Often refers to artists improvising, also known as "ad libbing", in other words playing from the top of their heads.
