@@ -79,7 +79,8 @@ ion-view.pane {
         display: block;
         width: 100%;
         text-shadow: #333 1px 1px;
-        transform: translate(-50%, 0);
+        text-align: center;
+        /*transform: translate(-50%, 0);*/
         -webkit-animation-duration: 2s;
         animation-duration: 2s;
         -webkit-animation-fill-mode: both;

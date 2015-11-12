@@ -2,7 +2,7 @@
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-whitelist@1.0.0"
+            "id": "cordova-plugin-whitelist"
         },
         "is_top_level": true,
         "variables": {}
@@ -33,18 +33,16 @@
     },
     "cordova-plugin-appavailability": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/ohh2ahh/AppAvailability.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-appavailability"
         },
         "is_top_level": true,
         "variables": {}
     },
     "org.pushandplay.cordova.apprate": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/pushandplay/cordova-plugin-apprate.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "org.pushandplay.cordova.apprate"
         },
         "is_top_level": true,
         "variables": {}
@@ -75,18 +73,16 @@
     },
     "cordova-plugin-x-socialsharing": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-x-socialsharing"
         },
         "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-google-analytics": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/danwilson/google-analytics-plugin.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-google-analytics"
         },
         "is_top_level": true,
         "variables": {}
@@ -113,6 +109,38 @@
             "id": "cordova-plugin-extension"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-dialogs": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-dialogs"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-globalization": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-globalization"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-statusbar"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }
