@@ -41,7 +41,10 @@ angular.module('abra.controllers')
 				success: function(count) {
 					var arr = [];
 					while (arr.length < $scope.request) {
-						arr.push(Math.ceil(Math.random() * count));
+						var random = Math.ceil(Math.random() * count);
+						if (arr.indexOf(random) === -1) {
+							arr.push(random);
+						}
 					}
 					query = new Parse.Query(AdLibs);
 					query.containedIn('index', arr);

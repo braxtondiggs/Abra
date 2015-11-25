@@ -309,7 +309,7 @@ module.exports = function (grunt) {
       ionic: {
         tasks: [],
         options: {
-          logConcurrentOutput: true
+          logConcurrentOutput: false
         }
       },
       server: [
@@ -520,7 +520,7 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('run', function() {
     grunt.config('concurrent.ionic.tasks', ['ionic:run:' + this.args.join(), 'watch']);
-    return grunt.task.run(['compress', 'concurrent:ionic']);
+    return grunt.task.run(['init', 'concurrent:ionic']);
   });
   grunt.registerTask('build', function() {
     return grunt.task.run(['compress', 'ionic:build:' + this.args.join()]);
