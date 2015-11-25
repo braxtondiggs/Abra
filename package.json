@@ -51,15 +51,15 @@
     "test": "grunt test"
   },
   "cordovaPlugins": [
-    "com.ionic.keyboard",
     "cordova-plugin-appavailability",
     "cordova-plugin-console",
     "cordova-plugin-device",
-    "cordova-plugin-whitelist@1.0.0",
     "cordova-plugin-google-analytics",
     "cordova-plugin-x-socialsharing",
     "org.pushandplay.cordova.apprate",
     "org.apache.cordova.statusbar",
+    "cordova-plugin-statusbar",
     "cordova-plugin-admobpro"
-  ]
+  ],
+  "cordovaPlatforms": []
 }
