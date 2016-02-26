@@ -52,7 +52,13 @@ ion-view.pane {
         padding-top: 20px;
     }
 }
-
+#loading-bar .bar {
+    background: $highlight1;
+    padding: 0;
+    .peg {
+        box-shadow: $highlight1 1px 0 6px 1px;
+    }
+}
 .header {
     color: $highlight1;
     font-family: 'helvetica_neue_lt_27ultraLtCn';

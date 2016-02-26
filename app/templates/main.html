@@ -1,35 +1,35 @@
 <ion-view view-title="Rapper Ad-libs" hide-back-button="true" cache-view="false">
-    <ion-content ng-show="rappers != null && imgLoad == true" ng-class="{'animated fadeInUp': rappers != null && imgLoad == true}">
-        <h2 class="center header">{{rapperCount+1}}. What rapper is this?</h2>
-        <div class="center header-image {{rappers[rapperCount].answer.status}}">
+    <ion-content ngfx-fade-in-up="imgLoad === true">
+        <h2 class="center header">{{current+1}}. What rapper is this?</h2>
+        <div class="center header-image {{(quiz[current].correct.status !== null)?((quiz[current].correct.status)?'correct':'wrong'):''}}">
             <div class="header-wrapper">
-                <img class="image animated" imageonload="loaded()" ng-class="{'show-image tada': rappers[rapperCount].answer !==  null}" ng-src="{{rappers[rapperCount].get('rapper').get('image')._url}}"/>
+                <img class="image animated" imageonload="loaded()" ng-class="{'show-image tada': quiz[current].correct.status !==  null}" ng-src="{{quiz[current].correct.image}}" />
             </div>
         </div>
-        <div class="play-me center" ng-click="playAudio()" ng-show="rappers[rapperCount].answer ===  null">
+        <div class="play-me center" ng-click="playAudio()" ng-show="quiz[current].correct.status ===  null">
             <i class="icons ion-play"></i>&nbsp;&nbsp;Play Again!
         </div>
-        <div class="play-me center" ng-click="next()" ng-show="rappers[rapperCount].answer !==  null">
+        <div class="play-me center" ng-click="next()" ng-show="quiz[current].correct.status !==  null">
             <i class="icons ion-arrow-right-c tada animated infinite" style="animation-duration: 2s;"></i>&nbsp;&nbsp;Next!
         </div>
         <div class="row options">
-            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[0] === 1, 'wrong': rappers[rapperCount].answer.options[0] === 2}" ng-click="answer(0)">
-                <img ng-src="{{rappers[rapperCount].rappers[0].get('image')._url}}" />
-                <span>{{rappers[rapperCount].rappers[0].get('name')}}</span>
+            <div class="col col-50 rapper" ng-class="{'correct': quiz[current].selected !== null && quiz[current].answers[0].isCorrect === true , 'wrong': quiz[current].selected === 0 && quiz[current].answers[0].isCorrect === false}" ng-click="answer(0)">
+                <img ng-src="{{quiz[current].answers[0].image}}" imageonload="loaded()" />
+                <span>{{quiz[current].answers[0].name}}</span>
             </div>
-            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[1] === 1, 'wrong': rappers[rapperCount].answer.options[1] === 2}" ng-click="answer(1)">
-                <img ng-src="{{rappers[rapperCount].rappers[1].get('image')._url}}" />
-                <span>{{rappers[rapperCount].rappers[1].get('name')}}</span>
+            <div class="col col-50 rapper" ng-class="{'correct': quiz[current].selected !== null && quiz[current].answers[1].isCorrect === true, 'wrong': quiz[current].selected === 1 && quiz[current].answers[1].isCorrect === false}" ng-click="answer(1)">
+                <img ng-src="{{quiz[current].answers[1].image}}" imageonload="loaded()" />
+                <span>{{quiz[current].answers[1].name}}</span>
             </div>
         </div>
         <div class="row options">
-            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[2] === 1, 'wrong': rappers[rapperCount].answer.options[2] === 2}" ng-click="answer(2)">
-                <img ng-src="{{rappers[rapperCount].rappers[2].get('image')._url}}" />
-                <span>{{rappers[rapperCount].rappers[2].get('name')}}</span>
+            <div class="col col-50 rapper" ng-class="{'correct': quiz[current].selected !== null && quiz[current].answers[2].isCorrect === true, 'wrong': quiz[current].selected === 2 && quiz[current].answers[2].isCorrect === false}" ng-click="answer(2)">
+                <img ng-src="{{quiz[current].answers[2].image}}" imageonload="loaded()" />
+                <span>{{quiz[current].answers[2].name}}</span>
             </div>
-            <div class="col col-50 rapper" ng-class="{'correct': rappers[rapperCount].answer.options[3] === 1, 'wrong': rappers[rapperCount].answer.options[3] === 2}" ng-click="answer(3)">
-                <img ng-src="{{rappers[rapperCount].rappers[3].get('image')._url}}" />
-                <span>{{rappers[rapperCount].rappers[3].get('name')}}</span>
+            <div class="col col-50 rapper" ng-class="{'correct': quiz[current].selected !== null && quiz[current].answers[3].isCorrect === true, 'wrong': quiz[current].selected === 3 && quiz[current].answers[3].isCorrect === false}" ng-click="answer(3)">
+                <img ng-src="{{quiz[current].answers[3].image}}" imageonload="loaded()" />
+                <span>{{quiz[current].answers[3].name}}</span>
             </div>
         </div>
     </ion-content>

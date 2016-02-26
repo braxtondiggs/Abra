@@ -102,6 +102,9 @@
         }
     },
     "installed_plugins": {
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.cymbit.Abra"
+        },
         "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.cymbit.Abra"
         },
@@ -115,6 +118,9 @@
             "PACKAGE_NAME": "com.cymbit.Abra"
         },
         "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.cymbit.Abra"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.cymbit.Abra"
         },
         "cordova-plugin-x-socialsharing": {
@@ -133,12 +139,6 @@
             "PACKAGE_NAME": "com.cymbit.Abra"
         },
         "org.pushandplay.cordova.apprate": {
-            "PACKAGE_NAME": "com.cymbit.Abra"
-        },
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.cymbit.Abra"
-        },
-        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.cymbit.Abra"
         }
     },

@@ -1,44 +1,27 @@
 'use strict';
-/*global Parse, ionic, AdMob*/
+/*global ionic, AdMob*/
 angular.module('abra.controllers')
-	.controller('IntroCtrl', ['$scope', '$window', '$interval', '$timeout', '$cordovaGoogleAnalytics', function($scope, $window, $interval , $timeout, $cordovaGoogleAnalytics) {
-		$scope.count = null;
-		$scope.isChanged = false;
-		var Rappers = Parse.Object.extend('Rappers');
-		function findImage() {
-			var query = new Parse.Query(Rappers);
-			query.limit(1);
-			query.skip(Math.floor(Math.random() * $scope.count));
-			query.find({
-				success: function(results) {
-					$scope.introImg = results[0].get('image')._url;
-					$timeout(function() {
-						$scope.isChanged = true;
-						$scope.$apply();
-					}, 500);
-				}
-			});
-		}
-		var query = new Parse.Query(Rappers);
-		query.count({
-			success: function(count) {
-				$scope.count = count;
-				findImage();
-			}
-		});
-		var interval = $interval(function() {
-			$scope.isChanged = false;
-			findImage();
-		}, 5000);
+	.controller('IntroCtrl', ['$scope', 'RapperService', 'FIREBASE_HOSTING', '$interval', '$timeout', '$location', 'cfpLoadingBar', '$cordovaGoogleAnalytics', function($scope, RapperService, FIREBASE_HOSTING , $interval, $timeout, $location, cfpLoadingBar, $cordovaGoogleAnalytics) {
+		cfpLoadingBar.start();
+        $scope.change = false;
 
-		$scope.go = function() {
-			if (angular.isDefined(interval)) {
-				$interval.cancel(interval);
-				interval = undefined;
-			}
-			$window.location = '#/app/main';
-		};
-
+        $scope.getStarted = function() {
+        	$location.url('app/main');
+        };
+        RapperService.loadRapper().$loaded().then(function() {
+            function getRapper() {
+                $timeout(function() {
+                	$scope.image = FIREBASE_HOSTING + RapperService.getRapper().image;
+                    $scope.change = true;
+                }, 500);
+            }
+            cfpLoadingBar.complete();
+            getRapper();
+            $interval(function() {
+                getRapper();
+                $scope.change = false;
+            }, 5000);
+        });
 		var adPublisherIds = {
 			ios : {
 				banner: 'ca-app-pub-1710263662438559/9009941781',
@@ -50,7 +33,7 @@ angular.module('abra.controllers')
 			}
 		};
 		var admobid = (/(android)/i.test(navigator.userAgent)) ? adPublisherIds.android : adPublisherIds.ios;
-		ionic.Platform.ready(function() {
+		/*ionic.Platform.ready(function() {
 			if (typeof AdMob !== 'undefined' && AdMob) {
 				AdMob.createBanner({
 					adId: admobid.banner,
@@ -65,5 +48,5 @@ angular.module('abra.controllers')
 			if (window.cordova) {
 				$cordovaGoogleAnalytics.trackView('Introduction Screen');
 			}
-		});
+		});*/
 	}]);
